@@ -67,7 +67,7 @@ conda activate multimodal-chatbot
 conda install pip -y
 pip install -r requirements.txt
 ```
-You may use a .env loader or store vars in the Hugging Face Space secrets.
+Create a .env file at the project root or store vars in the Hugging Face Space secrets.
 
 ### Run locally
 ```bash
