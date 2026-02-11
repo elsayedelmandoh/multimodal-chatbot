@@ -1,3 +1,32 @@
+from typing import List, Optional, Tuple, Tuple
+from PIL import Image
+import google.generativeai as genai
+import time
+from src.config.settings import GEMINI_API_KEY, CHATBOT_NAME, MODEL_ID, MODEL_OPTIONS, IMAGE_WIDTH, IMAGE_HEIGHT, SYSTEM_INSTRUCTION_ANALYSIS
+
+def initialize_model(api_key: Optional[str] = None):
+    """Initialize the Gemini generative model."""
+    if api_key:
+        genai.configure(api_key=api_key)
+    elif GEMINI_API_KEY:
+        genai.configure(api_key=GEMINI_API_KEY)
+    
+    model = genai.GenerativeModel(CHATBOT_NAME, system_instruction=SYSTEM_INSTRUCTION_ANALYSIS)
+    return model
+
+
+def preprocess_stop_sequences(stop_sequences: str) -> Optional[List[str]]:
+    return [seq.strip() for seq in stop_sequences.split(",")] if stop_sequences else None
+
+def preprocess_image(image: Image.Image) -> Image.Image:
+    image_height = int(image.height * IMAGE_WIDTH / image.width)
+    return image.resize((IMAGE_WIDTH, image_height))
+
+
+def user(text_prompt: str, chatbot: List[Tuple[str, str]]):
+    return "", chatbot + [[text_prompt, None]]
+
+
 def bot(
     gemini_key: str,
     image_prompt: Optional[Image.Image],

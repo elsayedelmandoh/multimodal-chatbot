@@ -1,4 +1,4 @@
-from src.config.settings import GEMINI_API_KEY, CHATBOT_NAME
+from src.config.settings import GEMINI_API_KEY
 
 import os
 import time
@@ -9,12 +9,6 @@ from PIL import Image
 import tempfile
 import os
 
-IMAGE_WIDTH = 512
-IMAGE_WIDTH = 512
-
-system_instruction_analysis = "You are an expert of the given topic. Analyze the provided text with a focus on the topic, identifying recent issues, recent insights, or improvements relevant to academic standards and effectiveness. Offer actionable advice for enhancing knowledge and suggest real-life examples."
-model = genai.GenerativeModel(CHATBOT_NAME, system_instruction=system_instruction_analysis)
-#genai.configure(api_key=gemini_key)
 
 # Components
 gemini_key_component = gr.Textbox(
